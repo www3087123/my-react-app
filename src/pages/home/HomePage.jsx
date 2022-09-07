@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   DesktopOutlined,
   FileOutlined,
@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom"
 import { Menu, } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getArticleClass } from "../../store/article/slice"
+import { getArticleClass, getArticleDate } from "../../store/article/slice"
 import { NavBar } from "./style"
 function getItem(label, key, icon, children) {
   return {
@@ -21,15 +21,16 @@ function getItem(label, key, icon, children) {
 }
 const items = [
   getItem('首页', '/', <PieChartOutlined />),
-  getItem('文章', '/asd', <DesktopOutlined />,
-    [getItem('查看文章', '/article', <DesktopOutlined />),
-    getItem('编写文章', '/addArticle', <DesktopOutlined />)
+  getItem('文章', '/key', <DesktopOutlined />,
+    [
+      getItem('查看文章', '/article', <DesktopOutlined />),
+      getItem('编写文章', '/addArticle', <DesktopOutlined />)
     ]),
   getItem('留言板', 'sub2', <TeamOutlined />),
   getItem('草稿箱', '9', <FileOutlined />),
 
 ];
-export default React.memo(function HomePage() {
+export default function HomePage() {
   // const [collapsed, setCollapsed] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
@@ -37,15 +38,17 @@ export default React.memo(function HomePage() {
   const clickMenu = (e) => {
     navigate(e.key)
   }
-  console.log("刷新了")
-
+  console.log("首页刷新");
   useEffect(() => {
     dispatch(getArticleClass())
+    dispatch(getArticleDate())
   }, [])
   return (
     <NavBar>
+            
+
       <div className='navLeft'>
-        <Menu theme="dark" defaultOpenKeys={[location.pathname]} selectedKeys={[location.pathname]} onSelect={clickMenu} mode="inline" items={items} />
+        <Menu theme="dark" defaultOpenKeys={["/key"]} selectedKeys={[location.pathname]} onSelect={clickMenu} mode="inline" items={items} />
       </div>
       <div style={{ width: "160px" }}></div>
       <div className='navright'>
@@ -57,4 +60,4 @@ export default React.memo(function HomePage() {
       </div>
     </NavBar>
   )
-})
+}

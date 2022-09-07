@@ -1,7 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { CardPage } from '../../components'
 import { Warpper, Header } from "./style"
+import { useSelector } from 'react-redux'
 export default function HomeIndexPage() {
+    const data = useSelector(i=>i.article.data)
+    console.log(data)
     return (
         <div>
             <Header>
@@ -12,7 +15,7 @@ export default function HomeIndexPage() {
                 </div>
             </Header>
             <Warpper>
-                <CardPage title={"文章数"} number={"123"} />
+                <CardPage title={"文章数"} number={data.length} />
                 <CardPage title={"草稿数"} number={"123"} />
                 <CardPage title={"留言数"} number={"123"} />
                 <CardPage title={"说说数"} number={"123"} />

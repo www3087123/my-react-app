@@ -43,6 +43,9 @@ export const Warpper = styled.div`
             }
         }
     }
+      tr  td{
+       max-width:270px !important;
+    }
 `
 
 export const MarkdromCss = styled.div`
@@ -50,10 +53,8 @@ export const MarkdromCss = styled.div`
     flex-direction:row;
     height: 100%;
     width: calc(100vw - 200px);
-
     div{
-        width: 50%;
-        min-width: 500px;
+        width: 100%;
         min-height: calc(100vh - 246px);
         border: 1px solid #000;
         height: 100%;
@@ -70,7 +71,6 @@ export const MarkdromCss = styled.div`
 export const MarkDromNav = styled.div`
     background-color: #b9dfff;
     padding-bottom:20px;
-    /* min-width: calc(100vh - 246px); */
 
     .top{
         display: flex;

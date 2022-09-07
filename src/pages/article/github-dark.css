@@ -1,0 +1,244 @@
+#hljs {
+    padding: 12px;
+    color: #c9d1d9;
+    background: #0d1117;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* 设置滚动条的样式 */
+#hljs::-webkit-scrollbar {
+    height: 12px;
+}
+/* 滚动槽 */
+#hljs::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+/* 滚动条滑块 */
+#hljs::-webkit-scrollbar-thumb {
+    background: #383838;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+code {
+    font-family: 'FiraCode', 'dengxian';
+}
+
+/* 代码片段 */
+#hljs code {
+    color: #c9d1d9;
+    background: #0d1117;
+    padding: 0;
+    font-size: 16px;
+    word-break:normal;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+    /* prettylights-syntax-keyword */
+    color: #ff7b72;
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+    /* prettylights-syntax-entity */
+    color: #d2a8ff;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+    /* prettylights-syntax-constant */
+    color: #79c0ff;
+}
+
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+    /* prettylights-syntax-string */
+    color: #a5d6ff;
+}
+
+.hljs-built_in,
+.hljs-symbol {
+    /* prettylights-syntax-variable */
+    color: #ffa657;
+}
+
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+    /* prettylights-syntax-comment */
+    color: #8b949e;
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+    /* prettylights-syntax-entity-tag */
+    color: #7ee787;
+}
+
+.hljs-subst {
+    /* prettylights-syntax-storage-modifier-import */
+    color: #c9d1d9;
+}
+
+.hljs-section {
+    /* prettylights-syntax-markup-heading */
+    color: #1f6feb;
+    font-weight: bold;
+}
+
+.hljs-bullet {
+    /* prettylights-syntax-markup-list */
+    color: #f2cc60;
+}
+
+.hljs-emphasis {
+    /* prettylights-syntax-markup-italic */
+    color: #c9d1d9;
+    font-style: italic;
+}
+
+.hljs-strong {
+    /* prettylights-syntax-markup-bold */
+    color: #c9d1d9;
+    font-weight: bold;
+}
+
+.hljs-addition {
+    /* prettylights-syntax-markup-inserted */
+    color: #aff5b4;
+    background-color: #033a16;
+}
+
+.hljs-deletion {
+    /* prettylights-syntax-markup-deleted */
+    color: #ffdcd7;
+    background-color: #67060c;
+}
+
+/* .hljs-char.escape_,
+.hljs-link,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
+
+} */
+.markdownStyle table {
+    margin: 20px auto;
+    border: 1px solid #000;
+    border-spacing: 0; /*去掉单元格间隙*/
+    text-align: center;
+}
+.markdownStyle table th,
+.markdownStyle table td {
+    padding: 6px 14px;
+    border: 1px solid #000;
+}
+/* h1 h2 h3 h4 h5 h6 p */
+/* .markdownStyle h1,
+.markdownStyle h2,
+.markdownStyle h3,
+.markdownStyle h4,
+.markdownStyle h5,
+.markdownStyle h6,
+.markdownStyle p {
+    margin: 0.3em;
+} */
+/* ——————————————————————————————显示区markdown样式—————————————————————————————— */
+/* 表格 */
+.markdownStyle table {
+    margin: 20px auto;
+    border: 1px solid #000;
+    border-spacing: 0; /*去掉单元格间隙*/
+    text-align: center;
+}
+.markdownStyle table th,
+.markdownStyle table td {
+    padding: 6px 14px;
+    border: 1px solid #000;
+}
+/* h1 h2 h3 h4 h5 h6 p */
+/* .markdownStyle h1,
+.markdownStyle h2,
+.markdownStyle h3,
+.markdownStyle h4,
+.markdownStyle h5,
+.markdownStyle h6,
+.markdownStyle p {
+    margin: 0.3em;
+} */
+/* ———————————————————————————编辑区大盒子——————————————————————————— */
+.editBox {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 编辑/显示区 */
+.inputRegion,
+.showRegion {
+    /* footer60 Header54 margin-top20 titleBox tagClassBox */
+    min-height: calc(100vh - 70px - 54px - 20px - 58px - 44px);
+    width: 50%;
+    background-color: #fff;
+    padding: 30px;
+    font-size: 18px;
+    word-break: break-word;
+}
+
+.inputRegion {
+    background-color: #d4f7ff;
+    outline: none;
+    overflow-y: hidden;
+    border: none;
+}
+/* 行内代码 */
+.markdownStyle code {
+    color: red;
+    background-color: #eeeeee;
+    padding: 0 4px;
+}
+
+/* 图片 */
+.markdownStyle p img {
+    display: block;
+    max-width: 100%;
+    margin: 14px auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.markdownStyle blockquote {
+    background-color: #dfdfdf;
+    padding: 14px 40px;
+    font-size: 18px;
+    border-radius: 20px;
+    border: 2px rgb(105, 105, 105) dashed;
+}
+.markdownStyle strong {
+    text-decoration: underline;
+}
+
+.markdownStyle blockquote p {
+    margin: 0;
+}
+/* ———————————————————————————————————————————————————————————— */

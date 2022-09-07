@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArticleDate, deletArticleDate } from "../../store/article/slice"
 import { Table, Space, Button, Popconfirm, message, Select } from "antd"
@@ -7,21 +7,15 @@ import dayjs from 'dayjs'
 import { auth } from '../../utils/cloudBase'
 import { adminUid } from '../../utils/constant'
 import { useNavigate } from "react-router-dom"
-const {Option} = Select
-const onChange = (pagination, filters, sorter, extra) => {
-  console.log('params', pagination, filters, sorter, extra);
-};
-export default function ArticlePage() {
+function ArticlePage() {
   const dispatch = useDispatch()
   const navigator = useNavigate()
   const data = useSelector(i => i.article.data)
   const loading = useSelector(i => i.article.loading)
   const classLoading = useSelector(i => i.article.classLoading)
-  const typeClasses = useSelector(i => i.article.typeClasses)
-
-  const [searchWords, setSearchWords] = useState()
-  const [searchClass, setSearchClass] = useState()
-  const [searchTag, setSearchTag] = useState()
+  const [newState, setnewState] = useState([])
+  const searchWords = useRef()
+  let timer = useRef(null)
   const columns = [
     {
       title: '标题',
@@ -31,9 +25,8 @@ export default function ArticlePage() {
       title: '发布日期',
       dataIndex: 'date',
       render: text => <>{dayjs(parseInt(text)).format('YYYY-MM-DD HH:mm:ss')}</>,
-      sorter: {
-        compare: (a, b) => a.chinese - b.chinese,
-      },
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.date - b.date,
     },
     {
       title: '分类',
@@ -77,20 +70,30 @@ export default function ArticlePage() {
         </Space>
       )
     }
-  ];
+  ]
   const deletArticle = (e) => {
     dispatch(deletArticleDate(e._id))
   }
-  const searchByWords = (e) => {
-    console.log(e)
+  const searchByWords = () => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      let keyword = searchWords.current.value.toLowerCase()
+      let a = data.filter(i => i.title.toLowerCase().indexOf(keyword) !== -1)
+      setnewState(a)
+    }, 600);
+
   }
   const turnAddPage = () => {
     navigator("/addArticle")
   }
   useEffect(() => {
     dispatch(getArticleDate())
-  }, [dispatch,])
+  }, [])
+  useEffect(() => {
+    setnewState(data)
+  }, [data])
   if (loading || classLoading) return "等待"
+  console.log("文章页刷新")
   return (
     <Warpper>
       <div className='inputtitle'>
@@ -99,47 +102,14 @@ export default function ArticlePage() {
         </div>
         <input
           type='text'
-          value={searchWords}
+          ref={searchWords}
           className='Search'
-          placeholder='输入文章标题...'
           onChange={searchByWords}
         />
-        <Select
-          showSearch
-          size='large'
-          allowClear
-          style={{ minWidth: '360px' }}
-          placeholder='请选择文章分类'
-          className='searchClass'
-          value={searchClass}
-          onChange={value => {
-            console.log(value)
-          }}
-        >
-          {typeClasses.classes.map(item => (
-            <Option key={item.class}>{item.class}</Option>
-          ))}
-        </Select>
-        <Select
-          mode='multiple'
-          showSearch
-          showArrow
-          size='large'
-          allowClear
-          style={{ flex: "0,0,500px", minWidth: "500px" }}
-          placeholder='请选择文章标签'
-          className='searchTag'
-          value={searchTag}
-          onChange={value => {
-            console.log(value)
-          }}
-        >
-          {typeClasses.list.map(item => (
-            <Option key={item.tag}>{item.tag}</Option>
-          ))}
-        </Select>
       </div>
-      <Table align="center" style={{ minWidth: "1200px" }} columns={columns} dataSource={data} rowKey={data => data._id} onChange={onChange} />
+      <Table align="center" style={{ minWidth: "1200px" }} columns={columns} dataSource={newState} rowKey={data => data._id} />
     </Warpper>
   )
 }
+
+export default React.memo(ArticlePage)

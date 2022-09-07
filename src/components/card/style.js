@@ -24,6 +24,7 @@ export const Warpper = styled.div`
         width: 100%;
         font-size: 80px;
         color: #1890ff;
+        transition: all .3s;
     }
     .number:hover{
         color: red;
