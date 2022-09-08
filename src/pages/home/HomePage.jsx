@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   DesktopOutlined,
   FileOutlined,
@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom"
 import { Menu, } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getArticleClass, getArticleDate } from "../../store/article/slice"
+import { getArticleClass, getArticleDate ,getlableClass} from "../../store/article/slice"
 import { NavBar } from "./style"
 function getItem(label, key, icon, children) {
   return {
@@ -38,11 +38,11 @@ export default function HomePage() {
   const clickMenu = (e) => {
     navigate(e.key)
   }
-  console.log("首页刷新");
   useEffect(() => {
     dispatch(getArticleClass())
     dispatch(getArticleDate())
-  }, [])
+    dispatch(getlableClass())
+  }, [dispatch])
   return (
     <NavBar>
             

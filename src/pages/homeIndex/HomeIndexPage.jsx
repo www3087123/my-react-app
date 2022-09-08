@@ -1,10 +1,9 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { CardPage } from '../../components'
 import { Warpper, Header } from "./style"
 import { useSelector } from 'react-redux'
 export default function HomeIndexPage() {
     const data = useSelector(i=>i.article.data)
-    console.log(data)
     return (
         <div>
             <Header>

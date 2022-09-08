@@ -14,7 +14,12 @@ export const deletArticleDate = createAsyncThunk("article/deletArticleDate", asy
 // 获取文章分类
 export const getArticleClass = createAsyncThunk("article/getArticleClass", async () => {
     let res = await db.collection('articleclass').limit(1000).get()
-    return res
+    return res.data
+})
+// 获取标签分类
+export const getlableClass = createAsyncThunk("article/getlableClass", async () => {
+    let res = await db.collection('label').limit(1000).get()
+    return res.data
 })
 const articleSlice = createSlice({
     name: "article",
@@ -23,10 +28,12 @@ const articleSlice = createSlice({
         loading: true,
         classLoading:true,
         error: null,
-        typeClasses:[]
+        articleClasses:[],
+        lableClasses:[]
     },
     reducers: {},
     extraReducers: {
+        // 获取文章
         [getArticleDate.pending.type]: (state) => {
             state.loading = true
         },
@@ -39,7 +46,7 @@ const articleSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
-
+        // 删除文章
         [deletArticleDate.pending.type]: (state) => {
             state.loading = true
         },
@@ -52,16 +59,29 @@ const articleSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
-
+        // 获取文章分类列表
         [getArticleClass.pending.type]: (state) => {
             state.classLoading = true
         },
         [getArticleClass.fulfilled.type]: (state, action) => {
             state.classLoading = false
-            state.typeClasses = action.payload.data[0].data
+            state.articleClasses = action.payload
             state.error = null
         },
         [getArticleClass.rejected.type]: (state, action) => {
+            state.classLoading = false
+            state.error = action.payload
+        },
+        // 获取标签分类列表
+        [getlableClass.pending.type]: (state) => {
+            state.classLoading = true
+        },
+        [getlableClass.fulfilled.type]: (state, action) => {
+            state.classLoading = false
+            state.lableClasses = action.payload
+            state.error = null
+        },
+        [getlableClass.rejected.type]: (state, action) => {
             state.classLoading = false
             state.error = action.payload
         },

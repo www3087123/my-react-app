@@ -93,7 +93,6 @@ function ArticlePage() {
     setnewState(data)
   }, [data])
   if (loading || classLoading) return "等待"
-  console.log("文章页刷新")
   return (
     <Warpper>
       <div className='inputtitle'>

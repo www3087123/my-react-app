@@ -4,7 +4,6 @@ import { Select, Input,message } from "antd"
 import { useSelector } from "react-redux"
 import { db ,auth} from '../../utils/cloudBase';
 import { adminUid } from '../../utils/constant'
-
 import { marked } from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
@@ -37,7 +36,8 @@ export default function AddarticlePage() {
     const [titleEng, setTitleEng] = useState('');
     const [searchClass, setSearchClass] = useState()
     const [searchTag, setSearchTag] = useState()
-    const typeClasses = useSelector(i => i.article.typeClasses)
+    const typeClasses = useSelector(i => i.article.articleClasses)
+    const lableClasses = useSelector(i => i.article.lableClasses)
     const loading = useSelector(i => i.article.classLoading)
     const addarticle = () => {
         if (auth.currentUser.uid !== adminUid) {
@@ -56,7 +56,6 @@ export default function AddarticlePage() {
         }else{
             message.error("还没有输入完全部内容不能发布哦！");
         }
-        
         console.log("英文标题:",titleEng,)
         console.log("文章分类:",searchClass,)
         console.log("文章标签：",searchTag)
@@ -85,8 +84,8 @@ export default function AddarticlePage() {
                         setSearchClass(value)
                     }}
                 >
-                    {typeClasses.classes.map(item => (
-                        <Option key={item.class}>{item.class}</Option>
+                    {typeClasses.map(item => (
+                        <Option key={item._id}>{item.title}</Option>
                     ))}
                 </Select>
                 <span className='type'>文章标签：</span>
@@ -104,8 +103,8 @@ export default function AddarticlePage() {
                         setSearchTag(value)
                     }}
                 >
-                    {typeClasses.list.map(item => (
-                        <Option key={item.tag}>{item.tag}</Option>
+                    {lableClasses.map(item => (
+                        <Option key={item._id}>{item.tag}</Option>
                     ))}
                 </Select>
             </div>
@@ -123,7 +122,6 @@ export default function AddarticlePage() {
                 >
                     {defaultContent}
                 </div>
-                    {console.log(content)}
                 <div
                     className="showRegion markdownStyle"
                     dangerouslySetInnerHTML={{
