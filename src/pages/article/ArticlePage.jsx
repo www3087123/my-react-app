@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArticleDate, deletArticleDate } from "../../store/article/slice"
-import { Table, Space, Button, Popconfirm, message, Select } from "antd"
+import { Table, Space, Button, Popconfirm, message } from "antd"
 import { Warpper } from './style'
 import dayjs from 'dayjs'
 import { auth } from '../../utils/cloudBase'
@@ -88,7 +88,7 @@ function ArticlePage() {
   }
   useEffect(() => {
     dispatch(getArticleDate())
-  }, [])
+  }, [dispatch])
   useEffect(() => {
     setnewState(data)
   }, [data])

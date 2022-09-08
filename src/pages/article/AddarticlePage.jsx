@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { MarkdromCss, MarkDromNav } from "./style"
-import { Select, Input,message } from "antd"
+import { Select,message } from "antd"
 import { useSelector } from "react-redux"
 import { db ,auth} from '../../utils/cloudBase';
 import { adminUid } from '../../utils/constant'
@@ -9,10 +9,9 @@ import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 import "./github-dark.css"
 const { Option } = Select
-const { TextArea } = Input
 export default function AddarticlePage() {
     // ---------------------- marked  start -----------------------
-    const [defaultContent, setDefaultContent] = useState(''); //marked
+    const [defaultContent] = useState(''); //marked
     const [content, setContent] = useState('');
     hljs.configure({
         tabReplace: '',

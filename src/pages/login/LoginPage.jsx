@@ -1,17 +1,12 @@
 import React from "react";
 import styles from "./Login.module.css"
 import { auth } from '../../utils/cloudBase';
-import { adminUid } from '../../utils/constant'
 
 import { Card, Form, Checkbox, Input, Button, message } from "antd"
 import { useNavigate } from "react-router-dom"
 export default function LoginPage() {
   const navigate = useNavigate()
   const onFinish = async (values) => {
-    if (auth.currentUser.uid !== adminUid) {
-      message.warning("不是管理员不可修改");
-      return
-    }
     console.log('Success:', values);
     // 点击登录
     await auth
